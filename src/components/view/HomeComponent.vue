@@ -36,11 +36,7 @@
                 formData.append('image', this.selectedImage);
                 formData.append('text', this.inputText);
                 try {
-                    const response = await axios.post(`${this.apiurl}/api/upload`, formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    });
+                    const response = await axios.post(`http://10.20.20.238:3000/api/upload`, formData);
                     // 서버 응답 처리
                     console.log(response.data);
                     alert("업로드 성공!");
