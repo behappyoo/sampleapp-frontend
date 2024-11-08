@@ -20,6 +20,11 @@
                 responseMessage: ''
             };
         },
+
+        mounted() {
+            // 컴포넌트가 마운트된 후 테스트용 API 요청 보내기
+            this.testApiRequest();
+        },
         
         methods: {
             handleFileChange(event) {
@@ -43,6 +48,17 @@
                 } catch (error) {
                     console.error('업로드 중 오류 발생:', error);
                     alert("업로드 실패.");
+                }
+            },
+
+            async testApiRequest() {
+                try {
+                    const response = await axios.get(`http://10.20.20.238:3000/health`);
+                    console.log("테스트 API 응답:", response.data);
+                    this.responseMessage = response.data.message || '서버에서 메시지가 없습니다.';
+                } catch (error) {
+                    console.error('테스트 요청 중 오류 발생:', error);
+                    this.responseMessage = '테스트 요청 실패.';
                 }
             }
         }
